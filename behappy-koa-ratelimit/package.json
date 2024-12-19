@@ -1,0 +1,42 @@
+{
+  "name": "behappy-koa-ratelimit",
+  "version": "1.0.0",
+  "private": true,
+  "description": "koa2 rate limit using redis",
+  "author": "xiaowu",
+  "main": "./index.js",
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "require": "./dist/core.cjs",
+      "default": "./index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "type": "module",
+  "types": "./index.d.ts",
+  "scripts": {
+    "build": "rollup -c -m",
+    "example": "node example/index.js"
+  },
+  "engines": {
+    "node": ">=16"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@https://github.com/behappy-project/behappy-koa-ratelimit.git"
+  },
+  "dependencies": {
+    "ioredis": "^4.17.3"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@types/koa": "^2.15.0",
+    "fs-extra": "^11.2.0",
+    "rollup-plugin-auto-external": "^2.0.0",
+    "typescript": "^5.3.2",
+    "koa": "^2.15.3",
+    "koa-body": "^6.0.1"
+  }
+}
