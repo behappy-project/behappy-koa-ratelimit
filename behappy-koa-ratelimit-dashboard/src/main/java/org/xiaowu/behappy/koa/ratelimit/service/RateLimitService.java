@@ -16,6 +16,8 @@ import org.xiaowu.behappy.koa.ratelimit.pojo.ratelimit.ModuleRateLimitSwitchRS;
 
 import java.util.*;
 
+import static org.xiaowu.behappy.koa.ratelimit.constant.RateLimitConfig.*;
+
 /**
  * @author xiaowu
  */
@@ -27,12 +29,6 @@ public class RateLimitService {
     private final MultiRedisConnectionFactory multiRedisConnectionFactory;
 
     private final RedisTemplate<String, Object> redisTemplate;
-
-    private final static String RATE_CONFIG_PREFIX = "BH-RATE-CONFIG:";
-
-    private final static String RATE_SWITCH_PREFIX = "BH-RATE-SWITCH:";
-
-    private final static String RATE_LIMIT_HOT_PREFIX = "BH-RATE-HOT:";
 
     public boolean saveOrUpdateRateLimitSwitch(ModuleRateLimitSwitchRQ moduleRateLimitRQ) {
         multiRedisConnectionFactory.setCurrentRedis(moduleRateLimitRQ.getEnv());
@@ -51,7 +47,7 @@ public class RateLimitService {
         multiRedisConnectionFactory.setCurrentRedis(env);
         List<ModuleRateLimitSwitchRS> limitSwitchRS = new ArrayList<>();
         if (StrUtil.isEmpty(module)) {
-            Set<String> keys = redisTemplate.keys(RateLimitService.RATE_SWITCH_PREFIX + "*");
+            Set<String> keys = redisTemplate.keys(RATE_SWITCH_PREFIX + "*");
             for (String key : keys) {
                 Map<Object, Object> entry = redisTemplate.opsForHash().entries(key);
                 String dbModule = key.split(":")[1];
@@ -101,9 +97,9 @@ public class RateLimitService {
         List<ModuleRateLimitConfigRS> limitConfigRS = new ArrayList<>();
         Set<String> keys;
         if (StrUtil.isEmpty(module)) {
-            keys = redisTemplate.keys(RateLimitService.RATE_CONFIG_PREFIX + "*");
+            keys = redisTemplate.keys(RATE_CONFIG_PREFIX + "*");
         } else {
-            keys = redisTemplate.keys(RateLimitService.RATE_CONFIG_PREFIX + module + "*");
+            keys = redisTemplate.keys(RATE_CONFIG_PREFIX + module + "*");
         }
         for (String key : keys) {
             Map<Object, Object> entry = redisTemplate.opsForHash().entries(key);
