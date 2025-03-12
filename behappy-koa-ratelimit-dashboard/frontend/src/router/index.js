@@ -81,8 +81,8 @@ export const constantRoutes = [
     component: Layout,
     children: [
       {
-        path: 'https://panjiachen.github.io/vue-element-admin-site/#/',
-        meta: { title: 'External Link', icon: 'link' }
+        path: 'https://github.com/behappy-project/behappy-koa-ratelimit',
+        meta: { title: '项目链接', icon: 'link' }
       }
     ]
   },
